@@ -31,8 +31,7 @@ De voorbeelden komen beide van https://www.pianokinderliedjes.nl.
 
 ### Sinterklaas Kapoentje
 
-![Sinterklaas Kapoentje](sinterklaas-kapoentje.png)
-{{< caption >}}<a href="https://www.pianokinderliedjes.nl/pdf/Sinterklaas_Kapoentje_4handig_inG.pdf">https://www.pianokinderliedjes.nl/pdf/Sinterklaas_Kapoentje_4handig_inG.pdf</a> {{< /caption >}}
+![Sinterklaas Kapoentje](scores/Sinterklaas%20Kapoentje.png)
 
 Hieronder staat de code voor dit liedje. We beginnen te bepalen met welke snelheid het liedje gespeeld wordt en met welke klank:
 
