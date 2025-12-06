@@ -1,29 +1,154 @@
 ---
-title: "Instructie template"
-date: 2024-09-20T15:51:01+02:00
+title: "Sonic Pi - december"
+date: 2025-12-06T14:29:01+01:00
 draft: false
 toc: true
 headercolor: "teal-background"
-onderwerp: Python 
+onderwerp: SonciPi 
 ---
 
-> Korte introductie dat wordt getoond in het overzicht van alle instructies
+Met Sonic Pi kun je muziek programmeren als code! In deze instructie gaan we wat muziek maken, passend in de maand december.
 
 <!--more-->
 
-> Te doen:
-> 1. Pas [FrontMatter](https://gohugo.io/content-management/front-matter/) aan boven in dit bestand.
->    - `title` naar een passende titel bij deze instructie
->    - `data` naar vandaag
->    - `onderwerp` naar de gebruikte techniek aanpassen, bijvoorbeeld Python (wordt gebruikt om te sorteren per onderwerp)
-> 2. Denk qua structuur aan:
->   - Introductie van het onderwerp
->   - Wat heb je nodig (programma's/materialen)
->   - De instructie zelf verdeelt over stappen; het is fijn als kinderen per stap al resultaat kunnen zien
->   - Afronding met bijvoorbeeld uitdagingen op basis van het geleerde en/of linkjes naar pagina's met nog meer informatie over het onderwerp
-> 3. Laat onderstaande licentie staan
-> 
-> Bekijk [deze uitleg](https://github.com/coderdojonijmegen/hugo-coderdojo-nijmegen/blob/main/README.md) over hoe je kunt zien
-> hoe je instructies er uit zien in de site.  
+## Introductie
+
+Sonic Pi is een programma geschreven door Sam Aaron en het Sonic Pi Core team. Je kunt er muziek in programmeren en zelfs
+live muziek in aanpassen terwijl het speelt!
+
+In deze instructie leren we hoe je muziek kunt maken in Sonic Pi op basis van bladmuziek van eenvoudige liedjes passend
+in de maand december. We maken Sinterklaas Kapoentje en Klink klokje klingelingeling. Je leert ook hoe je zelf op basis
+van bladmuziek muziek kunt programmeren.
+
+## Wat heb je nodig?
+
+{{< include file="/installatie/sonic-pi" >}}
+
+## Twee voorbeelden
+
+We hebben 2 voorbeelden uitgewerkt voor gebruik in Sonic Pi.  
+De voorbeelden komen beide van https://www.pianokinderliedjes.nl. 
+
+### Sinterklaas Kapoentje
+
+![Sinterklaas Kapoentje](sinterklaas-kapoentje.png)
+{{< caption >}}<a href="https://www.pianokinderliedjes.nl/pdf/Sinterklaas_Kapoentje_4handig_inG.pdf">https://www.pianokinderliedjes.nl/pdf/Sinterklaas_Kapoentje_4handig_inG.pdf</a> {{< /caption >}}
+
+Hieronder staat de code voor dit liedje. We beginnen te bepalen met welke snelheid het liedje gespeeld wordt en met welke klank:
+
+- `use_bpm` bepaalt de snelheid, in dit geval 120 beats-per-minute. Speel eens met de waarde en kijk wat er gebeurd.
+- `use_synth` bepaalt de klank, in dit geval piano. Andere klinken vind je
+
+Daarna schrijven we de noten uit de bladmuziek hierboven: 
+
+- `play :g4` speelt een G in de 4e octaaf
+- `sleep 0.66` bepaalt de duur van de noot (niet van de klank), in dit geval 0,66 seconden
+
+Beide instructies kunnen op hun eigen regel, maar als ze samen op één regel staan, moet er een ; (punt-komma) tussen.
+
+<details>
+<summary>hier</summary>
+<pre>
+    :dull_bell
+    :pretty_bell
+    :beep
+    :sine
+    :saw
+    :pulse
+    :subpulse
+    :square
+    :tri
+    :dsaw
+    :dpulse
+    :dtri
+    :fm
+    :mod_fm
+    :mod_saw
+    :mod_dsaw
+    :mod_sine
+    :mod_beep
+    :mod_tri
+    :mod_pulse
+    :tb303
+    :supersaw
+    :hoover
+    :prophet
+    :zawa
+    :dark_ambience
+    :growl
+    :hollow
+    :mono_player
+    :stereo_player
+    :blade
+    :piano
+    :pluck
+    :sound_in
+    :noise
+    :pnoise
+    :bnoise
+    :gnoise
+    :cnoise
+    :basic_mono_player
+    :basic_stereo_player
+    :basic_mixer
+    :main_mixer
+</details>
+
+```bash
+    use_bpm 120
+    use_synth :piano
+
+    # Sin - ter
+    play :g4; sleep 0.66
+    play :g4; sleep 0.33
+    # klaas - Ka
+    play :a4; sleep 0.66
+    play :a4; sleep 0.33
+    # poen
+    play :g4; sleep 1.0
+    # tje,
+    play :e4; sleep 1.0
+    
+    # gooi - wat
+    play :g4; sleep 0.66
+    play :g4; sleep 0.33
+    # in - mijn
+    play :a4; sleep 0.66
+    play :a4; sleep 0.33
+    # schoen
+    play :g4; sleep 1.0
+    # tje
+    play :e4; sleep 1.0
+    
+    # gooi - wat
+    play :f4; sleep 0.66
+    play :f4; sleep 0.33
+    # in - mijn
+    play :f4; sleep 0.66
+    play :d4; sleep 0.33
+    # laars
+    play :f4; sleep 1.0
+    # je
+    play :f4; sleep 1.0
+    
+    # dank - u
+    play :a4; sleep 0.66
+    play :g4; sleep 0.33
+    # sin - ter
+    play :f4; sleep 0.66
+    play :e4; sleep 0.33
+    # klaas
+    play :d4; sleep 1.0
+    # je
+    play :c4; sleep 1.0
+
+```
+
+## Zelf aan de slag
+
+## Goed gedaan!
+
+Meer muziek: https://www.pianokinderliedjes.nl/index.php  
+Tutorial: https://sonic-pi.net/tutorial.html
 
 {{< licentie rel="http://creativecommons.org/licenses/by-nc-sa/4.0/">}}
