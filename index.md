@@ -142,7 +142,94 @@ Beide instructies kunnen op hun eigen regel, maar als ze samen op één regel st
     play :c4; sleep 1.0
 
 ```
+### Kling klokje klingeling
 
+![Kling klokje klingeling](scores/Kling-klokje-klingelingeling.png)
+
+```bash
+    use_bpm 60
+    use_synth :piano
+    
+    # Kling - klok - je
+    play :c5; sleep 0.5
+    play :a4; sleep 0.25
+    play :bb4; sleep 0.25
+    
+    # klin - ge - lin - ge - ling,
+    play :c5; sleep 0.125
+    play :d5; sleep 0.125
+    play :c5; sleep 0.125
+    play :d5; sleep 0.125
+    play :c5; sleep 0.5
+    
+    # kling - klok - je
+    play :bb4; sleep 0.5
+    play :g4; sleep 0.25
+    play :c5; sleep 0.25
+    
+    # kling
+    play :a4; sleep 1
+    
+    # Laat - de - bood - schap
+    play :g4; sleep 0.25
+    play :g4; sleep 0.25
+    play :a4; sleep 0.25
+    play :f4; sleep 0.25
+    
+    # ho - ren,
+    play :a4; sleep 0.5
+    play :g4; sleep 0.5
+    
+    # zin - gen - d'enge - len
+    play :bb4; sleep 0.25
+    play :bb4; sleep 0.25
+    play :c5; sleep 0.25
+    play :g4; sleep 0.25
+    
+    # ko - ren,
+    play :bb4; sleep 0.5
+    play :a4; sleep 0.5
+    
+    # voor - die - blij - de
+    play :g4; sleep 0.25
+    play :g4; sleep 0.25
+    play :a4; sleep 0.25
+    play :b4; sleep 0.25
+    
+    # klan - ken
+    play :c5; sleep 0.5
+    play :g4; sleep 0.5
+    
+    # wil - len - wij - God
+    play :a4; sleep 0.25
+    play :d5; sleep 0.25
+    play :c5; sleep 0.25
+    play :b4; sleep 0.25
+    
+    # dan - ken
+    play :d5; sleep 0.5
+    play :c5; sleep 0.5
+    
+    # Kling - klok - je
+    play :c5; sleep 0.5
+    play :a4; sleep 0.25
+    play :bb4; sleep 0.25
+    
+    # klin - ge - lin - ge - ling,
+    play :c5; sleep 0.125
+    play :d5; sleep 0.125
+    play :c5; sleep 0.125
+    play :d5; sleep 0.125
+    play :c5; sleep 0.5
+    
+    # kling - klok - je
+    play :bb4; sleep 0.5
+    play :g4; sleep 0.25
+    play :c5; sleep 0.25
+    
+    # kling.
+    play :a4; sleep 1
+```
 ## Zelf aan de slag
 
 ## Goed gedaan!
