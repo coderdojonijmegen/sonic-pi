@@ -24,26 +24,19 @@ van bladmuziek muziek kunt programmeren.
 
 {{< include file="/installatie/sonic-pi" >}}
 
-## Twee voorbeelden
+## Hoe je code schrijft in Sonic Pi
 
-We hebben 2 voorbeelden uitgewerkt voor gebruik in Sonic Pi.  
-De voorbeelden komen beide van https://www.pianokinderliedjes.nl. 
+Voordat we naar liedjes kijken, verkennen we eerst even Sonic Pi zelf. Probeer de onderstaande voorbeelden door ze in te typen of te kopiëren en druk elke keer op play om het te horen. Maak vervolgens aanpassingen en luister naar wat er verandert. Sonic Pi is het leukst als je ermee experimenteert, maak vooral fouten en luister goed naar wat wel en niet werkt. 
 
-### Sinterklaas Kapoentje
 
-![Sinterklaas Kapoentje](scores/Sinterklaas%20Kapoentje.png)
+```ruby
+    use_synth :piano
 
-Hieronder staat de code voor dit liedje. We beginnen te bepalen met welke snelheid het liedje gespeeld wordt en met welke klank:
+    play :c4
+```
 
-- `use_bpm` bepaalt de snelheid, in dit geval 120 beats-per-minute. Speel eens met de waarde en kijk wat er gebeurd.
-- `use_synth` bepaalt de klank, in dit geval piano. Andere klinken vind je
-
-Daarna schrijven we de noten uit de bladmuziek hierboven: 
-
-- `play :g4` speelt een G in de 4e octaaf
-- `sleep 0.66` bepaalt de duur van de noot (niet van de klank), in dit geval 0,66 seconden
-
-Beide instructies kunnen op hun eigen regel, maar als ze samen op één regel staan, moet er een ; (punt-komma) tussen.
+Druk nu op de play knop. Wat hoor je?  
+Deze code selecteert een piano geluid en speelt de toon C. De 4 geeft aan hoe hoog de C moet zijn. Probeer daar eens een 3 of 5 van te maken en luister naar het verschil. Maak van de C een andere letter zoals G of D en luister naar het verschil. Je kunt ook andere geluiden gebruiken dan piano, probeer eens :saw of :fm en luister naar het verschil. Andere klanken vind je
 
 <details>
 <summary>hier</summary>
@@ -93,7 +86,137 @@ Beide instructies kunnen op hun eigen regel, maar als ze samen op één regel st
     :main_mixer
 </details>
 
-```bash
+### Meer noten
+Probeer de onderstaande code eens en druk op play. Hoor je wat je verwacht?
+
+```ruby
+    use_synth :piano
+
+    play :c4
+    play :e4
+    play :g4
+```
+
+Er spelen drie noten tegelijk! Dit noemen we een akkoord. Probeer eens hoe het klinkt als je hier de toon van elke noot aan past. Wat klinkt mooit en wat klinkt niet mooi?
+
+Tot nu toe hebben we geluid, maar nog geen muziek. Om een melodie te maken, moet Sonic Pi even wachten tussen elke noot. Dat doen we zo:
+
+```ruby
+    use_bpm 120
+    use_synth :piano
+
+    play :c4
+    sleep 1
+    play :e4
+    sleep 1
+    play :g4
+    sleep 1
+    play :e4
+    sleep 1
+    play :c4
+```
+
+Met de sleep commando zeg je tegen Sonic Pi dat het 1 tel moet wachten. Hoe lang een tel duurt, wordt bepaald door je bpm: Beats Per Minute, oftewel tellen per minuut. Door dit getal hoger of lager te maken gaat je muziek sneller of langzamer. Kun je de muziek 2x zo snel maken? Of 2x zo langzaam? En wat gebeurt er als je sleep een hoger getal geeft? Of een lager getal?
+
+Let op dat je met programmeren een punt gebruikt in plaats van een komma. Als je bijvoorbeeld een halve tel wilt wachten in plaats van een hele tel, schrijf je `0.5`.
+
+### Programmeren in Sonic Pi
+
+Nu dat je de basis kent, is het tijd om het wat interessanter te maken. Probeer dit eens:
+
+```ruby
+    use_bpm 120
+    use_synth :piano
+
+    live_loop :melodie do
+        play :c4
+        sleep 1
+        play :e4
+        sleep 1
+        play :g4, decay: 1
+        sleep 2
+    end
+```
+
+Dit bevat wat nieuwe elementen:
+
+* De `live_loop` zorgt ervoor dat de muziek zich blijft herhalen
+* De `decay` zorgt ervoor dat de noot iets langer wordt aangehouden. Probeer ook eens decay met de andere tonen. En speel eens met het getal achter decay en de sleep die erop volgt.
+* De laatste sleep duurt langer dan de eerste twee, bij elkaar opgeteld kom je tot 4. Als je muziektheorie kent, herken je een 4/4 (vier kwarts) maatsoort. Hier komen we straks op terug.
+
+De live loop is het hart van Sonic Pi. Je kunt meerdere live_loops gebruiken om je muziek gelaagd te maken. Let op dat je niet tussendoor op stop hoeft te klikken, de muziek blijft in de maat:
+
+```ruby
+    use_bpm 120
+    use_synth :piano
+
+    live_loop :melodie do
+        play :c4
+        sleep 1
+        play :e4
+        sleep 1
+        play :g4, decay: 1
+        sleep 2
+    end
+
+    live_loop :beat do
+        sync :melodie
+        sample :bd_fat
+        sleep 2
+        sample :sn_dub
+        sleep 1
+        sample :bd_fat
+        sleep 1
+        sample :bd_fat
+        sleep 2
+        sample :sn_dub
+    end
+```
+
+Het begin is nog hetzelfde, maar nu hebben we twee live loops: een melodie en een beat. De beat gebruikt samples om een soort drumstel te maken. Elke loop heeft een naam, die we kunnen gebruiken om te syncen. Sync zorgt ervoor dat de loops gelijk blijven. Wat gebeurt er als je die regel weg haalt? En wat gebeurt er als je meer sleeps of meer samples in de tweede loop zet?
+
+Ter afsluiting, laten we nog een effect eronder gooien. Laat je code hetzelfde en voeg deze code eronder toe:
+
+```ruby
+    live_loop :bass do
+        sync :melodie
+        sleep 1
+        sample :bass_dnb_f
+    end
+```
+
+Deze sample heeft wel power! Begrijp je alle code tot nu toe? Je kunt nog andere samples verkennen in de Help van Sonic Pi. Er is vanalles, wat je muziek echt tot leven brengt!
+
+Speel hier nog even mee door, of ga verder met deze tekst, want nu weet je genoeg over de code om liedjes te gaan maken!
+
+
+## Twee voorbeelden
+
+We hebben 2 voorbeelden uitgewerkt voor gebruik in Sonic Pi.  
+De voorbeelden komen beide van https://www.pianokinderliedjes.nl. 
+
+### Sinterklaas Kapoentje
+
+![Sinterklaas Kapoentje](scores/Sinterklaas%20Kapoentje.png)
+
+
+
+
+
+
+Hieronder staat de code voor dit liedje. We beginnen te bepalen met welke snelheid het liedje gespeeld wordt en met welke klank:
+
+- `use_bpm` bepaalt de snelheid, in dit geval 120 beats-per-minute. Speel eens met de waarde en kijk wat er gebeurd.
+- `use_synth` bepaalt de klank, in dit geval piano. Andere klinken vind je
+
+Daarna schrijven we de noten uit de bladmuziek hierboven: 
+
+- `play :g4` speelt een G in de 4e octaaf
+- `sleep 0.66` bepaalt de duur van de noot (niet van de klank), in dit geval 0,66 seconden
+
+Beide instructies kunnen op hun eigen regel, maar als ze samen op één regel staan, moet er een ; (punt-komma) tussen.
+
+```ruby
     use_bpm 120
     use_synth :piano
 
@@ -146,7 +269,7 @@ Beide instructies kunnen op hun eigen regel, maar als ze samen op één regel st
 
 ![Kling klokje klingeling](scores/Kling-klokje-klingelingeling.png)
 
-```bash
+```ruby
     use_bpm 60
     use_synth :piano
     
