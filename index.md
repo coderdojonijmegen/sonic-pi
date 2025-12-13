@@ -26,7 +26,7 @@ van bladmuziek muziek kunt programmeren.
 
 ## Hoe je code schrijft in Sonic Pi
 
-Voordat we naar liedjes kijken, verkennen we eerst even Sonic Pi zelf. Probeer de onderstaande voorbeelden door ze in te typen of te kopiëren en druk elke keer op play om het te horen. Maak vervolgens aanpassingen en luister naar wat er verandert. Sonic Pi is het leukst als je ermee experimenteert, maak vooral fouten en luister goed naar wat wel en niet werkt. 
+Voordat we naar liedjes kijken, verkennen we eerst even Sonic Pi zelf. Probeer de onderstaande voorbeelden door ze in te typen of te kopiëren en druk elke keer op run om het te horen. Maak vervolgens aanpassingen en luister naar wat er verandert. Sonic Pi is het leukst als je ermee experimenteert, maak vooral fouten en luister goed naar wat wel en niet werkt. 
 
 
 ```ruby
@@ -35,7 +35,7 @@ Voordat we naar liedjes kijken, verkennen we eerst even Sonic Pi zelf. Probeer d
     play :c4
 ```
 
-Druk nu op de play knop. Wat hoor je?  
+Druk nu op de run knop. Wat hoor je?  
 Deze code selecteert een piano geluid en speelt de toon C. De 4 geeft aan hoe hoog de C moet zijn. Probeer daar eens een 3 of 5 van te maken en luister naar het verschil. Maak van de C een andere letter zoals G of D en luister naar het verschil. Je kunt ook andere geluiden gebruiken dan piano, probeer eens :saw of :fm en luister naar het verschil. Andere klanken vind je
 
 <details>
@@ -87,7 +87,7 @@ Deze code selecteert een piano geluid en speelt de toon C. De 4 geeft aan hoe ho
 </details>
 
 ### Meer noten
-Probeer de onderstaande code eens en druk op play. Hoor je wat je verwacht?
+Probeer de onderstaande code eens en druk op run. Hoor je wat je verwacht?
 
 ```ruby
     use_synth :piano
@@ -118,7 +118,7 @@ Tot nu toe hebben we geluid, maar nog geen muziek. Om een melodie te maken, moet
 
 Met de sleep commando zeg je tegen Sonic Pi dat het 1 tel moet wachten. Hoe lang een tel duurt, wordt bepaald door je bpm: Beats Per Minute, oftewel tellen per minuut. Door dit getal hoger of lager te maken gaat je muziek sneller of langzamer. Kun je de muziek 2x zo snel maken? Of 2x zo langzaam? En wat gebeurt er als je sleep een hoger getal geeft? Of een lager getal?
 
-Let op dat je met programmeren een punt gebruikt in plaats van een komma. Als je bijvoorbeeld een halve tel wilt wachten in plaats van een hele tel, schrijf je `0.5`.
+Let op dat je met programmeren een punt gebruikt in plaats van een komma. Als je bijvoorbeeld een halve tel wilt wachten in plaats van een hele tel, schrijf je `0.5`
 
 ### Programmeren in Sonic Pi
 
