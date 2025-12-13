@@ -199,161 +199,191 @@ De voorbeelden komen beide van https://www.pianokinderliedjes.nl.
 
 ![Sinterklaas Kapoentje](scores/Sinterklaas%20Kapoentje.png)
 
+Als je bladmuziek kan lezen, heb je misschien al een idee hoe je dit naar Sonic Pi kan overschrijven. Zo niet, dan helpen we je nog even op weg:
 
+![Uitleg bladmuziek](scores/Uitleg%20Sinterklaas%20Kapoentje.png)
 
+Wat we hier uit halen:
 
+- De maatsoort is 3/4, dat betekent dat er drie tellen in de maat zijn en elke tel is een kwart noot (1/4)
+- Een kwart noot kun je dus noteren als `sleep 1`
+- Een halve noot kun je noteren als `sleep 2`
+- Een rust betekent nog een extra tel wachten voordat de muziek verder gaat, dus in dit geval `sleep 3`
+- We hebben handig de toonhoogtes in letters erboven geschreven, de G toon in Sonic Pi is dus `play :g4`
 
+Nu zou je het hele liedje moeten kunnen schrijven in Sonic Pi. Misschien vind je dat nog moeilijk, dus kun je hier onder spieken hoe wij dat hebben gedaan. Voordat je verder leest, probeer het toch maar even
 
-Hieronder staat de code voor dit liedje. We beginnen te bepalen met welke snelheid het liedje gespeeld wordt en met welke klank:
+Nog één opmerking voordat we alles uit de kast trekken: we vinden 3 tellen per maat best wel langzaam, dus kiezen wij ervoor om 1 tel per maat te nemen. Dat combineert ook leuker met de beat van de vorige oefening. Om dat te doen moeten we rekenen: elke kwart noot delen we door drie.
 
-- `use_bpm` bepaalt de snelheid, in dit geval 120 beats-per-minute. Speel eens met de waarde en kijk wat er gebeurd.
-- `use_synth` bepaalt de klank, in dit geval piano. Andere klinken vind je
-
-Daarna schrijven we de noten uit de bladmuziek hierboven: 
-
-- `play :g4` speelt een G in de 4e octaaf
-- `sleep 0.66` bepaalt de duur van de noot (niet van de klank), in dit geval 0,66 seconden
-
-Beide instructies kunnen op hun eigen regel, maar als ze samen op één regel staan, moet er een ; (punt-komma) tussen.
+Dit is hoe wij het hebben gedaan, er zitten een paar nieuwe trucjes in die we nog niet verteld hebben:
 
 ```ruby
     use_bpm 120
     use_synth :piano
 
-    # Sin - ter
-    play :g4; sleep 0.66
-    play :g4; sleep 0.33
-    # klaas - Ka
-    play :a4; sleep 0.66
-    play :a4; sleep 0.33
-    # poen
-    play :g4; sleep 1.0
-    # tje,
-    play :e4; sleep 1.0
-    
-    # gooi - wat
-    play :g4; sleep 0.66
-    play :g4; sleep 0.33
-    # in - mijn
-    play :a4; sleep 0.66
-    play :a4; sleep 0.33
-    # schoen
-    play :g4; sleep 1.0
-    # tje
-    play :e4; sleep 1.0
-    
-    # gooi - wat
-    play :f4; sleep 0.66
-    play :f4; sleep 0.33
-    # in - mijn
-    play :f4; sleep 0.66
-    play :d4; sleep 0.33
-    # laars
-    play :f4; sleep 1.0
-    # je
-    play :f4; sleep 1.0
-    
-    # dank - u
-    play :a4; sleep 0.66
-    play :g4; sleep 0.33
-    # sin - ter
-    play :f4; sleep 0.66
-    play :e4; sleep 0.33
-    # klaas
-    play :d4; sleep 1.0
-    # je
-    play :c4; sleep 1.0
+    kwart_noot = 1.0 / 3
+    halve_noot = kwart_noot * 2
+    hele_maat = kwart_noot * 3
 
+    live_loop :melodie do
+        2.times do
+            # Sin - ter
+            play :g4; sleep halve_noot
+            play :g4; sleep kwart_noot
+            # klaas - Ka
+            play :a4; sleep halve_noot
+            play :a4; sleep kwart_noot
+            # poen
+            play :g4, decay: halve_noot
+            sleep hele_maat
+            # tje,
+            play :e4, decay: halve_noot
+            sleep hele_maat
+        end
+        
+        # gooi - wat
+        play :f4; sleep halve_noot
+        play :f4; sleep kwart_noot
+        # in - mijn
+        play :f4; sleep halve_noot
+        play :d4; sleep kwart_noot
+        # laars
+        play :f4, decay: halve_noot
+        sleep hele_maat
+        # je
+        play :f4, decay: halve_noot
+        sleep hele_maat
+        
+        # dank - u
+        play :a4; sleep halve_noot
+        play :g4; sleep kwart_noot
+        # sin - ter
+        play :f4; sleep halve_noot
+        play :e4; sleep kwart_noot
+        # klaas
+        play :d4, decay: halve_noot
+        sleep hele_maat
+        # je
+        play :c4, decay: halve_noot
+        sleep hele_maat
+    end
 ```
+
+Dit zijn de nieuwe trucjes:
+
+- Met `kwart_noot = 1.0 / 3` definiëren we een variabele, met een berekening van hoe lang een kwart noot duurt.
+- De halve_noot en hele_maat zijn ook variabelen, hoe lang ze duren hangt af van hoe lang de kwart_noot duurt. Als je dus de timing wilt veranderen, hoef je alleen de kwart_noot te veranderen!
+- `2.times do` zorgt ervoor dat het eerste stukje twee keer gespeeld wordt.
+- De `;` zorgt ervoor dat we play en sleep op 1 regel kunnen zetten.
+
+Probeer nu eens een beat eronder te zetten, kun je een mooie remix maken?
+
+## Zelf aan de slag
+
+Ben je klaar om zelf een liedje om te schrijven? Om in de kerst sfeer te komen, hebben we voor het volgende liedje ook alle tonen erboven geschreven.
+
 ### Kling klokje klingeling
 
 ![Kling klokje klingeling](scores/Kling-klokje-klingelingeling.png)
 
+Probeer dit nu zelf om te schrijven. Je kunt weer spieken hoe wij het hebben gedaan, maar probeer het eerst zelf. Verken de Help van Sonic Pi om te ontdekken wat je nog meer kan gebruiken.
+
+Tip: zoek op in de Help hoe je een functie definiëert. Omdat de eerste regel zich herhaalt in het lied, kun je de functie later weer aan roepen om die regel niet 2x uit te hoeven schrijven.
+
+<details>
+    <summary>Klap dit uit om onze versie te zien</summary>
+
 ```ruby
-    use_bpm 60
+    use_bpm 180
     use_synth :piano
-    
-    # Kling - klok - je
-    play :c5; sleep 0.5
-    play :a4; sleep 0.25
-    play :bb4; sleep 0.25
-    
-    # klin - ge - lin - ge - ling,
-    play :c5; sleep 0.125
-    play :d5; sleep 0.125
-    play :c5; sleep 0.125
-    play :d5; sleep 0.125
-    play :c5; sleep 0.5
-    
-    # kling - klok - je
-    play :bb4; sleep 0.5
-    play :g4; sleep 0.25
-    play :c5; sleep 0.25
-    
-    # kling
-    play :a4; sleep 1
-    
-    # Laat - de - bood - schap
-    play :g4; sleep 0.25
-    play :g4; sleep 0.25
-    play :a4; sleep 0.25
-    play :f4; sleep 0.25
-    
-    # ho - ren,
-    play :a4; sleep 0.5
-    play :g4; sleep 0.5
-    
-    # zin - gen - d'enge - len
-    play :bb4; sleep 0.25
-    play :bb4; sleep 0.25
-    play :c5; sleep 0.25
-    play :g4; sleep 0.25
-    
-    # ko - ren,
-    play :bb4; sleep 0.5
-    play :a4; sleep 0.5
-    
-    # voor - die - blij - de
-    play :g4; sleep 0.25
-    play :g4; sleep 0.25
-    play :a4; sleep 0.25
-    play :b4; sleep 0.25
-    
-    # klan - ken
-    play :c5; sleep 0.5
-    play :g4; sleep 0.5
-    
-    # wil - len - wij - God
-    play :a4; sleep 0.25
-    play :d5; sleep 0.25
-    play :c5; sleep 0.25
-    play :b4; sleep 0.25
-    
-    # dan - ken
-    play :d5; sleep 0.5
-    play :c5; sleep 0.5
-    
-    # Kling - klok - je
-    play :c5; sleep 0.5
-    play :a4; sleep 0.25
-    play :bb4; sleep 0.25
-    
-    # klin - ge - lin - ge - ling,
-    play :c5; sleep 0.125
-    play :d5; sleep 0.125
-    play :c5; sleep 0.125
-    play :d5; sleep 0.125
-    play :c5; sleep 0.5
-    
-    # kling - klok - je
-    play :bb4; sleep 0.5
-    play :g4; sleep 0.25
-    play :c5; sleep 0.25
-    
-    # kling.
-    play :a4; sleep 1
+
+    kwart_noot = 1.0
+    achtste_noot = kwart_noot / 2
+    halve_noot = kwart_noot * 2
+    hele_maat = kwart_noot * 4
+
+    define :eerste_regel do
+        # Kling - klok - je
+        play :c5, decay: halve_noot
+        sleep halve_noot
+        play :a4; sleep kwart_noot
+        play :bb4; sleep kwart_noot
+        
+        # klin - ge - lin - ge - ling,
+        play :c5; sleep achtste_noot
+        play :d5; sleep achtste_noot
+        play :c5; sleep achtste_noot
+        play :d5; sleep achtste_noot
+        play :c5, decay: halve_noot
+        sleep halve_noot
+        
+        # kling - klok - je
+        play :bb4, decay: halve_noot
+        sleep halve_noot
+        play :g4; sleep kwart_noot
+        play :c5; sleep kwart_noot
+        
+        # kling
+        play :a4, decay: halve_noot
+        sleep hele_maat
+    end
+
+    live_loop :melodie do
+        eerste_regel
+        
+        # Laat - de - bood - schap
+        play :g4; sleep kwart_noot
+        play :g4; sleep kwart_noot
+        play :a4; sleep kwart_noot
+        play :f4; sleep kwart_noot
+        
+        # ho - ren,
+        play :a4, decay: halve_noot
+        sleep halve_noot
+        play :g4, decay: halve_noot
+        sleep halve_noot
+        
+        # zin - gen - d'enge - len
+        play :bb4; sleep kwart_noot
+        play :bb4; sleep kwart_noot
+        play :c5; sleep kwart_noot
+        play :g4; sleep kwart_noot
+        
+        # ko - ren,
+        play :bb4, decay: halve_noot
+        sleep halve_noot
+        play :a4, decay: halve_noot
+        sleep halve_noot
+        
+        # voor - die - blij - de
+        play :g4; sleep kwart_noot
+        play :g4; sleep kwart_noot
+        play :a4; sleep kwart_noot
+        play :b4; sleep kwart_noot
+        
+        # klan - ken
+        play :c5, decay: halve_noot
+        sleep halve_noot
+        play :g4, decay: halve_noot
+        sleep halve_noot
+        
+        # wil - len - wij - God
+        play :a4; sleep kwart_noot
+        play :d5; sleep kwart_noot
+        play :c5; sleep kwart_noot
+        play :b4; sleep kwart_noot
+        
+        # dan - ken
+        play :d5, decay: halve_noot
+        sleep halve_noot
+        play :c5, decay: halve_noot
+        sleep halve_noot
+        
+        eerste_regel
+    end
 ```
-## Zelf aan de slag
+</details>
+
 
 ## Goed gedaan!
 
